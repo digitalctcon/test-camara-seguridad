@@ -20,9 +20,18 @@ from slack_sdk.errors import SlackApiError
 from shapely.geometry import box
 
 #Valores para mandar el mensaje
-token = 'xoxb-8034814938848-8009323784501-w5EEs0r4whztTSvSQKxOcJL5'  # Tu token de bot
-channel = 'C084028TXED'  # Nombre o ID del canal
-rtsp_url = "rtsp://rgullon:Lion5651@192.168.16.55:554/videoMain"
+
+# Access Slack credentials
+token = st.secrets["slack"]["token"]
+channel = st.secrets["slack"]["channel"]
+
+# Access Foscam credentials
+foscam_username = st.secrets["foscam"]["username"]
+foscam_password = st.secrets["foscam"]["password"]
+foscam_ip = st.secrets["foscam"]["ip"]
+foscam_port = st.secrets["foscam"]["port"]
+rtsp_url = f"rtsp://{foscam_username}:{foscam_password}@{foscam_ip}:{foscam_port}/videoMain"
+
 
 def draw_boxes(frame, results, color=(255, 0, 0), label_prefix="", class_filter=None, 
                return_detected_objects=False, dibujar=True):
